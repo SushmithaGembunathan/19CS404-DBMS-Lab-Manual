@@ -38,123 +38,197 @@ HAVING condition;
 
 **Question 1**
 --
--- Paste Question 1 here
+How many male and female doctors are there in each medical specialty?
+
+Sample table:Doctors Table
 
 ```sql
--- Paste your SQL code below for Question 1
+select specialty, gender, count(doctorID) AS TotalDoctors from Doctors Group by Specialty , Gender order by Specialty , gender ;
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="1257" height="665" alt="image" src="https://github.com/user-attachments/assets/25088f41-15c2-4414-9f09-53d99710fd3d" />
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+How many medical records were created in each month?
+Sample table:MedicalRecords Table
 
 ```sql
--- Paste your SQL code below for Question 2
+select strftime('%Y-%m',Date) as Month,
+count(*) as TotalRecords 
+from medicalrecords 
+group by strftime('%Y-%m',date)
+order by Month;
 ```
 
 **Output:**
 
-![Output2](output.png)
+<img width="1264" height="468" alt="image" src="https://github.com/user-attachments/assets/fe006ae9-774e-4c92-9a6a-af3c27cd0ded" />
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+What is the most common diagnosis among patients?
+Sample table:MedicalRecords Table
 
 ```sql
--- Paste your SQL code below for Question 3
+select Diagnosis , count(*) as DiagnosisCount
+from medicalrecords
+group by Diagnosis
+order by DiagnosisCount desc
+limit 1;
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="1264" height="349" alt="image" src="https://github.com/user-attachments/assets/53027b85-a210-4734-b0d4-c587665a4f81" />
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+Write a SQL query that counts the number of unique salespeople. Return number of salespeople.
+
+Sample table: orders
+
+ord_no      purch_amt   ord_date    customer_id  salesman_id
+
+----------  ----------  ----------  -----------  -----------
+
+70001       150.5       2012-10-05  3005         5002
+
+70009       270.65      2012-09-10  3001         5005
+
+70002       65.26       2012-10-05  3002         5001
 
 ```sql
--- Paste your SQL code below for Question 4
+select count(distinct salesman_id) as COUNT from orders ;
 ```
 
 **Output:**
 
-![Output4](output.png)
+<img width="1259" height="361" alt="image" src="https://github.com/user-attachments/assets/11c3a5ff-db43-48d8-87cf-d089b0b88d39" />
+
 
 **Question 5**
 ---
--- Paste Question 5 here
+Write a SQL query to calculate total purchase amount of all orders. Return total purchase amount.
+
+Sample table: orders
+
+ord_no      purch_amt   ord_date    customer_id  salesman_id
+
+----------  ----------  ----------  -----------  -----------
+
+70001       150.5       2012-10-05  3005         5002
+
+70009       270.65      2012-09-10  3001         5005
+
+70002       65.26       2012-10-05  3002         5001
 
 ```sql
--- Paste your SQL code below for Question 5
+select SUM(purch_amt) as TOTAL from orders ;
 ```
 
 **Output:**
+<img width="1257" height="355" alt="Screenshot 2025-10-23 050627" src="https://github.com/user-attachments/assets/b80ee37b-3b19-4915-99b7-8f620a1be6d4" />
 
-![Output5](output.png)
+
 
 **Question 6**
 ---
--- Paste Question 6 here
+Write a SQL query to find the Fruit with the lowest available quantity.
+
+Note: Inventory attribute contains amount of fruits
+
+Table: fruits
+
+name        type
+----------  ----------
+id          INTEGER
+name        TEXT
+unit        TEXT
+inventory   INTEGER
+price       REAL
 
 ```sql
--- Paste your SQL code below for Question 6
+select name as fruit_name , inventory as lowest_quantity from fruits where inventory = (select min(inventory) from fruits) ;
 ```
 
 **Output:**
 
-![Output6](output.png)
+<img width="1263" height="359" alt="image" src="https://github.com/user-attachments/assets/cbd20ef7-3abe-4b32-87be-294024771a0a" />
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+Write a SQL query to find the total income of employees aged 40 or above.
+
+Table: employee
+
+name        type
+----------  ----------
+id          INTEGER
+name        TEXT
+age         INTEGER
+city        TEXT
+income      INTEGER
 
 ```sql
--- Paste your SQL code below for Question 7
+select sum(income) as total_income from employee where age >=40;
 ```
 
 **Output:**
 
-![Output7](output.png)
+<img width="1253" height="355" alt="image" src="https://github.com/user-attachments/assets/f8a2dbb0-b047-4a8a-a679-d189fd4de109" />
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+Write the SQL query that accomplishes the selection of product which has lowest price in each category from the "products" table and includes only those products where the minimum price is less than 10.
+
+Sample table: products
 
 ```sql
--- Paste your SQL code below for Question 8
+select category_id , min(price) as Price from products group by category_id having min(price) < 10 ;
 ```
 
 **Output:**
 
-![Output8](output.png)
+<img width="1258" height="394" alt="image" src="https://github.com/user-attachments/assets/1e3edb3d-53b2-4224-b1ed-64d5d4ec8dc8" />
+
 
 **Question 9**
 ---
--- Paste Question 9 here
+Write the SQL query that accomplishes the grouping of data by joining date (jdate), calculates the average work hours for each date, and excludes dates where the average work hour is not less than 10.
+
+Sample table: employee1
 
 ```sql
--- Paste your SQL code below for Question 9
+select jdate , AVG(workhour) from employee1 group by jdate having avg(workhour) < 10 ;
 ```
 
 **Output:**
 
-![Output9](output.png)
+<img width="1264" height="379" alt="image" src="https://github.com/user-attachments/assets/35158496-93d3-42a0-9e46-3b680a3da5cd" />
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+Write a SQL query to identify the cities (addresses) where the average salary is greater than Rs. 5000, as per the "customer1" table.
+
+Sample table: customer1
 
 ```sql
--- Paste your SQL code below for Question 10
+select address , AVG(salary) from customer1 group by address having AVG(salary) > 5000;
 ```
 
 **Output:**
 
-![Output10](output.png)
+<img width="1250" height="467" alt="image" src="https://github.com/user-attachments/assets/225bcfb6-5995-4646-b8b4-1b9976d16b1e" />
+
 
 
 ## RESULT
