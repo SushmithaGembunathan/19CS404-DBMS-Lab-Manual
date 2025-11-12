@@ -237,3 +237,7 @@ select address , AVG(salary) from customer1 group by address having AVG(salary) 
 
 ## RESULT
 Thus, the SQL queries to implement aggregate functions, GROUP BY, and HAVING clause have been executed successfully.
+
+## Module Completion
+<img width="1080" height="110" alt="Screenshot 2025-11-12 202409" src="https://github.com/user-attachments/assets/6fe21904-6448-4051-81af-6e584ac23c00" />
+
