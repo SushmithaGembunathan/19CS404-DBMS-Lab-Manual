@@ -288,4 +288,5 @@ delete from doctors where doctor_id between 2 and 4 ;
 Thus, the SQL queries to implement DML commands have been executed successfully.
 
 ## Module Completion
-<img width="1080" height="110" alt="Screenshot 2025-11-12 202409" src="https://github.com/user-attachments/assets/82f117a4-8295-4508-8838-599ad46ec2cd" />
+
+<img width="1065" height="77" alt="image" src="https://github.com/user-attachments/assets/c77e8c3d-60e8-4bc2-9151-346dd0545924" />
