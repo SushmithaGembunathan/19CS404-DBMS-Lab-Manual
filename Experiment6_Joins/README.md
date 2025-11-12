@@ -286,13 +286,27 @@ INNER JOIN
 ---
 
 
-```sql
--- Paste your SQL code below for Question 7
-```
+sql
+Write the SQL query that achieves the selection of the "cust_name" column from the "customer" table (aliased as "c"), and the "ord_no," "ord_date," and "purch_amt" columns from the "orders" table (aliased as "o"), with a left join on the "customer_id" column.
 
+'customer' Table: (customer_id, cust_name, city, grade, salesman_id)
+
+'orders' Table: (ord_no, purch_amt, ord_date, customer_id, salesman_id)
+```
+SELECT
+    c.cust_name,
+    o.ord_no,
+    o.ord_date,
+    o.purch_amt
+FROM
+    customer c
+LEFT JOIN
+    orders o ON c.customer_id = o.customer_id;
+```
 **Output:**
 
-![Output7](output.png)
+<img width="1095" height="894" alt="image" src="https://github.com/user-attachments/assets/e11abfa8-1fb0-4c52-92a9-2f1d9c870cac" />
+
 
 **Question 8**
 ---
