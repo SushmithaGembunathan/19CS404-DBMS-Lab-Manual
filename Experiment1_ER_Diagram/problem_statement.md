@@ -1,101 +1,159 @@
-# Experiment 1: Entity-Relationship (ER) Diagram
+# ER Diagram Workshop – Submission Template
 
-## 🎯 Objective:
-To understand and apply the concepts of ER modeling by creating an ER diagram for a real-world application.
+## Objective
+To understand and apply ER modeling concepts by creating ER diagrams for real-world applications.
 
-## 📚 Purpose:
-The purpose of this workshop is to gain hands-on experience in designing ER diagrams that visually represent the structure of a database including entities, relationships, attributes, and constraints.
-
----
-
-## 🧪 Choose One Scenario:
-
-### 🔹 Scenario 1: University Database
-Design a database to manage students, instructors, programs, courses, and student enrollments. Include prerequisites for courses.
-
-**User Requirements:**
-- Academic programs grouped under departments.
-- Students have admission number, name, DOB, contact info.
-- Instructors with staff number, contact info, etc.
-- Courses have number, name, credits.
-- Track course enrollments by students and enrollment date.
-- Add support for prerequisites (some courses require others).
+## Purpose
+Gain hands-on experience in designing ER diagrams that represent database structure including entities, relationships, attributes, and constraints.
 
 ---
 
-### 🔹 Scenario 2: Hospital Database
-Design a database for patient management, appointments, medical records, and billing.
+## Scenario A: City Fitness Club Management
+**Business Context:**
+FlexiFit Gym wants a database to manage its members, trainers, and fitness programs.
+**Requirements:**
+- Members register with name, membership type, and start date.
+- Each member can join multiple programs (Yoga, Zumba, Weight Training).
+- Trainers assigned to programs; a program may have multiple trainers.
+- Members may book personal training sessions with trainers.
+- Attendance recorded for each session.
+- Payments tracked for memberships and sessions.
 
-**User Requirements:**
-- Patient details including contact and insurance.
-- Doctors and their departments, contact info, specialization.
-- Appointments with reason, time, patient-doctor link.
-- Medical records with treatments, diagnosis, test results.
-- Billing and payment details for each appointment.
+
+### ER Diagram:
+*Paste or attach your diagram here*  
+
+
+<img width="933" height="822" alt="GYM drawio" src="https://github.com/user-attachments/assets/25105c95-f7de-4b8a-b409-a8f95019db08" />
+
+
+
+
+### Entities and Attributes
+
+| Entity |           Attributes (PK, FK)               |         Notes                |
+|--------|---------------------------                  |------------------------------|
+|Member  | MemberID ,Type,StartDate                    | Store member details         |
+|Trainer | TrainerID,Name,Contact	                   | Store Trainer details        |
+|Program | ProgramID,Name,Cost                         | Programs like Zumbz/yoga     |
+|Session | SessionID,Date,MemberID,TrainerID           | Tracks attendance            |
+|Payment | PaymentID,Amount,MemberID,Date              | Tracks payments by members   |
+
+### Relationships and Constraints
+
+|    Relationship    | Cardinality   |                 Participation                  |                Notes                  |
+|--------------------|---------------|------------------------------------------------|---------------------------------------|
+|  Member-Program    |    M:N        | Optional(Member),Mandatory(Join)         |  Members may join multiple programs  |
+|  Trainer-Program   |    M:N        | Optional(Trainer),Mandatory(Assign)        | Trainers may run multiple programs   |
+|  Session-Member    |    1:N        | Mandatory (Session), Optional (Member) | Each session has one member  |
+|  Session-Trainer    |    1:N        | Mandatory (Session), Optional (Trainer) | Each session has one trainer  |
+|  Member-Payment    |    1:N        | Mandatory (Payment), Optional (Member/) | Payments linked to members  |
+
+### Assumptions
+- Program = recurring class; Session = specific instance.
+- Payments cover both memberships and sessions.
+- A Session links one Member and one Trainer.
 
 ---
 
-## 📝 Tasks:
-1. Identify entities, relationships, and attributes.
-2. Draw the ER diagram using any tool (draw.io, dbdiagram.io, hand-drawn and scanned).
-3. Include:
-   - Cardinality & participation constraints
-   - Prerequisites for University OR Billing for Hospital
-4. Explain:
-   - Why you chose the entities and relationships.
-   - How you modeled prerequisites or billing.
-
-# ER Diagram Submission - Student Name
-
-## Scenario Chosen:
-Hospital 
-
-## ER Diagram:
-<img width="1133" height="723" alt="Screenshot 2025-08-27 171550" src="https://github.com/user-attachments/assets/89cab340-b43e-4886-b754-c199eb071691" />
+## Scenario B: City Library Event & Book Lending System
+**Business Context:**
+The Central Library wants to manage book lending and cultural events.
+**Requirements:**
+- Members borrow books, with loan and return dates tracked.
+- Each book has title, author, and category.
+- Library organizes events; members can register.
+- Each event has one or more speakers/authors.
+- Rooms are booked for events and study.
+- Overdue fines apply for late returns
 
 
-## Entities and Attributes:
-- Patient : PatientID (PK),Name,DOB,Gender,Phone
-- Doctor : DoctorID (PK) , Name ,Phone ,Specialization,DepartmentID (FK)
-- Department : DepartmentID (PK) ,DeptName ,Location
-- Appointment : AppointmentID (PK) ,PatientID (FK) , DoctorID (FK), AppointmentDateTime   , ReasonStatus
-- Medical Record :RecordID (PK) ,PatientID (FK), DoctorID (FK) ,AppointmentID (FK) ,RecordDate , Diagnosis , Treatment
-- Billing : BillID (PK) , AppointmentID (FK) ,Amount , PaymentStatus, PaymentMethod ,BillingDate
+### ER Diagram:
+*Paste or attach your diagram here*  
 
-## Relationships and Constraints:
-- Patient — Has — Appointment Cardinality: One-to-Many (A patient can have many appointments, each appointment is for one patient)
-
-Participation: Total on Appointment (Every appointment must involve a patient)
-
-- Doctor — Attends — Appointment Cardinality: One-to-Many (A doctor can attend many appointments, but each appointment is with one doctor)
-
-Participation: Total on Appointment
-
-- Appointment — Generates — Medical Record Cardinality: One-to-One (Each appointment generates one medical record, each medical record belongs to one appointment)
-
-Participation: Partial (Not every appointment may generate a record, e.g., cancelled visit)
-
-- Appointment — Has Bill — Billing Cardinality: One-to-One (Each appointment has at most one billing, each bill is for one appointment)
-
-Participation: Partial on Appointment (not all appointments may have billing, e.g., free check-up)
-
-- Doctor — Belongs To — Department Cardinality: Many-to-One (Many doctors belong to one department)
-
-Participation: Total on Doctor (every doctor must belong to a department)
+<img width="1241" height="921" alt="Library drawio" src="https://github.com/user-attachments/assets/02fbeaf8-d9e6-4f16-8fa7-8f898f838c92" />
 
 
-## Extension (Prerequisite / Billing):
-- An appointment can generate at most one bill.
-This is represented using a one-to-one relationship between Appointment and Billing, with partial participation on Appointment.
 
-## Design Choices:
-- Appointment is the central entity connecting Patient and Doctor, making it the hub for Medical Records and Billing.
+### Entities and Attributes
 
-- Medical Record is linked to Appointments instead of directly to patients, ensuring proper context of treatment and diagnosis.
+|  Entity |                              Attributes (PK, FK)                                  |         Notes           |
+|---------|-----------------------------------------------------------------------------------|-------------------------|
+| Member  | MemberID (PK), Name,Contact                                                     | Library members         |
+| Book    | BookID (PK), Title, Author, Category                    | Books in collection     |
+| Loan    | LoanID (PK),Date,Fine, MemberID (FK), BookID (FK)       | Tracks book borrowing   |
+| Event   | EventID (PK), Name,Date,RoomID (FK)                     | Library cultural events |
+| Speaker | SpeakerID (PK), Name,Contact                            | Event speakers/authors  |
+| Booking | 	BookingID (PK), Date, RoomID (FK), MemberID (FK)     | Study room reservations |
 
-- Billing is linked to Appointments, as charges are generated per visit.
+### Relationships and Constraints
 
-- Department structures doctors, providing a way to organize based on specialization and hospital units.
+|       Relationship | Cardinality |                       Participation                    |               Notes              |
+|--------------------|-------------|--------------------------------------------------------|----------------------------------|
+| Member–Loan        |     1:N     |  Mandatory (Loan), Optional (Member)          | Members borrow books            |
+| Member–Event       |     M:N     |  Mandatory (Registration), Optional | Members register for events      |
+| Event–Speaker      |     M:N     |  Mandatory (EventSpeaker), Optional| Events may have multiple speakers|
+| Event–Room         |     1:1     |  Mandatory (Event), Optional (Room)               | Each event in one room           |
+| Room–Booking       |     1:N     |  Mandatory (Booking), Optional (Room)              | Rooms booked for study by members|
 
-## RESULT
-The ER model accurately represents a hospital system with patients, doctors, departments, appointments, medical records, and billing.
+### Assumptions
+- Overdue fines are stored per Loan record.
+- BookCopy not modeled
+- Rooms serve both events and study bookings.
+
+---
+
+# Scenario C: Restaurant Table Reservation & Ordering
+**Business Context:**
+A popular restaurant wants to manage reservations, orders, and billing.
+**Requirements:**
+- Customers can reserve tables or walk in.
+- Each reservation includes date, time, and number of guests.
+- Customers place food orders linked to reservations.
+- Each order contains multiple dishes; dishes belong to categories (starter, main, dessert).
+- Bills generated per reservation, including food and service charges.
+- Waiters assigned to serve reservations.
+
+
+### ER Diagram:
+*Paste or attach your diagram here*  
+
+<img width="1571" height="811" alt="Restaurant drawio" src="https://github.com/user-attachments/assets/ce6499be-476f-4e16-b34d-64b942b302ea" />
+
+
+### Entities and Attributes
+
+|   Entity     |                                        Attributes (PK, FK)                                            |           Notes            |
+|--------------|-------------------------------------------------------------------------------------------------------|----------------------------|
+| Customer       | CustomerID, Name, Contact                                                                  | Customer details             |
+| Waiter       | WaiterID, Name, Contact                                                                   | Waiter details             |
+|  Table       | 	TableID, Number, Capacity                                                            | Restaurant tables          |
+|  Reservation |  ResID, Date, Time, Guests, CustomerID, TableID                                                          | Table bookings             |
+|  Order       | OrderID, ResID, Status| Orders linked              |
+|  Dish        |  DishID, Name, Category                        | Menu items                 |
+|  Bill        | 	BillID, ResID, Amounts                    | Final bill per reservation |  
+|  Assignment  | AssignID, WaiterID, ResID                                                 | Resolves Waiter–Reservation|
+### Relationships and Constraints
+
+|      Relationship     | Cardinality |            Participation                                  |                Notes                    |
+|-----------------------|-------------|-----------------------------------------------------------|-----------------------------------------|
+|  Customer–Reservation |  1:N        |  Mandatory for Reservation, Optional for Customer         | One customer can have many reservations |
+| Reservation–Table     |  1:1        |  Mandatory for Reservation, Optional for Tabl             | Each reservation is for one table       |
+|   Order–Dish          |  M:N        |  Mandatory for Order_Item, Optional for Order/Dish        | An order can include many dishes        |
+|  Reservation–Bill     |  1:1        |  Mandatory for Bill, Optional for Reservation             | One bill per reservation                |
+| Waiter–Reservation    |  M:N        | Mandatory for Assignment, Optional for Waiter/Reservation | Multiple waiters can serve a reservation|
+
+### Assumptions
+- Walk-in customers are still recorded
+- One bill per reservation
+- Split payments not modeled; could extend with a Payment entity.
+
+---
+
+## Instructions for Students
+
+1. Complete **all three scenarios** (A, B, C).  
+2. Identify entities, relationships, and attributes for each.  
+3. Draw ER diagrams using **draw.io / diagrams.net** or hand-drawn & scanned.  
+4. Fill in all tables and assumptions for each scenario.  
+5. Export the completed Markdown (with diagrams) as **a single PDF**
